@@ -33,11 +33,13 @@ func sendResponse(url_ string, id float64, text string) {
 }
 
 func getChatId(byt map[string]interface{}) float64 {
-	return (((byt["result"].([]interface{}))[1].(map[string]interface{}))["message"].(map[string]interface{}))["chat"].(map[string]interface{})["id"].(float64)
+	temp := (byt["result"].([]interface{}))
+	return ((temp[len(temp)-1].(map[string]interface{}))["message"].(map[string]interface{}))["chat"].(map[string]interface{})["id"].(float64)
 }
 
 func getUserText(byt map[string]interface{}) string {
-	return (((byt["result"].([]interface{}))[1].(map[string]interface{}))["message"].(map[string]interface{}))["text"].(string)
+	temp := (byt["result"].([]interface{}))
+	return ((temp[len(temp)-1].(map[string]interface{}))["message"].(map[string]interface{}))["text"].(string)
 }
 
 func handler() {

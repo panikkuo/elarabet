@@ -1,0 +1,19 @@
+services:
+  pg_db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: engineer
+      POSTGRES_PASSWORD: top_secret_pass
+      POSTGRES_DB: dev_stack
+    volumes:
+      - pg_storage:/var/lib/postgresql/data
+
+  db_manager:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  pg_storage:
