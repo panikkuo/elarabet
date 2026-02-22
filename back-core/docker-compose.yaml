@@ -3,9 +3,9 @@ services:
     image: postgres:15-alpine
     restart: always
     environment:
-      POSTGRES_USER: engineer
-      POSTGRES_PASSWORD: top_secret_pass
-      POSTGRES_DB: dev_stack
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - pg_storage:/var/lib/postgresql/data
 
