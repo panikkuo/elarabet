@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pg_storage:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
 
   db_manager:
     image: adminer:latest
