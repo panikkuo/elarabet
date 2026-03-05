@@ -9,7 +9,7 @@ import (
 	"github.com/panikkuo/elarabet/back-core/src/logger"
 )
 
-const kHandlerName = "GET api/v1/users"
+const kHandlerName = "GET api/v1/users/{user_id}"
 
 type GetUsersResponse struct {
 	Username string `json:"username"`
@@ -22,14 +22,20 @@ func Get(response http.ResponseWriter, request *http.Request) {
 
 	var responseBody GetUsersResponse
 	vars := mux.Vars(request)
-	username := vars["username"]
+	userId := vars["user_id"]
+
+	if userId == "" {
+		response.WriteHeader(http.StatusBadRequest)
+		response.Write([]byte(`{Error: userid cant be empty}`))
+		return
+	}
 
 	dbConn := db.Get()
 
 	err := dbConn.QueryRow(ctx,
 		`SELECT username, email, name 
 		FROM users
-		WHERE username = $1`, username,
+		WHERE id = $1`, userId,
 	).Scan(&responseBody.Username, &responseBody.Email, &responseBody.Name)
 
 	if err != nil {

@@ -30,7 +30,7 @@ func Post(response http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		go logger.Log(err.Error(), kHandlerName)
 		response.WriteHeader(http.StatusBadRequest)
-		response.Write([]byte(`{Error: cant parse json}`))
+		response.Write([]byte(`{"Error": "cant parse json}"`))
 		return
 	}
 	defer request.Body.Close()
@@ -60,6 +60,9 @@ func Post(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	go logger.Log("Success", kHandlerName)
+	response.WriteHeader(http.StatusOK)
+
 	err = json.NewEncoder(response).Encode(&responseBody)
 	if err != nil {
 		go logger.Log(err.Error(), kHandlerName)
@@ -67,7 +70,4 @@ func Post(response http.ResponseWriter, request *http.Request) {
 		response.Write([]byte(`{Error: cant parse json}`))
 		return
 	}
-
-	go logger.Log("Success", kHandlerName)
-	response.WriteHeader(http.StatusOK)
 }

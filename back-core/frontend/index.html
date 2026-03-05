@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"></head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <span id="tab-login" class="active" onclick="switchTab('login')">Вход</span>
+            <span id="tab-signup" onclick="switchTab('signup')">Регистрация</span>
+        </div>
+        <div id="form-login">
+            <input type="text" id="l-user" placeholder="Логин">
+            <input type="password" id="l-pass" placeholder="Пароль">
+            <button style="width:100%" onclick="login()">Войти</button>
+        </div>
+        <div id="form-signup" class="hidden">
+            <input type="text" id="s-user" placeholder="Логин">
+            <input type="password" id="s-pass" placeholder="Пароль">
+            <input type="email" id="s-email" placeholder="Email">
+            <input type="text" id="s-name" placeholder="Имя">
+            <button style="width:100%" onclick="signup()">Создать</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

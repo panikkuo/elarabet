@@ -14,5 +14,6 @@ CREATE TABLE notes(
     user_id uuid REFERENCES users(id)
         ON UPDATE CASCADE 
         ON DELETE CASCADE,
-    note TEXT
+    note TEXT,
+    done INTEGER NOT NULL
 );

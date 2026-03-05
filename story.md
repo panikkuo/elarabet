@@ -30,7 +30,8 @@ Notes
 id
 parent_id
 user_id
-text
+note
+done
 
 Вообще что должно делать
 
@@ -45,29 +46,68 @@ text
 
 ### Endpoints
 
-POST api/v1/signup
-
+POST /v1/signup
 {
-    username:
-    password:
-    email:
+    username: string
+    password: string
+    email: string
     name:
 }
 {
-    id:
-    username:
-    name:
+    id: uuid 
+    username: string
 }
 
-POST api/v1/login
+POST /v1/login
 {
-    usename
-    passowrd
+    usename: string
+    passowrd: string
 }
 
-GET api/v1/users/{id}
-UPDATE api/v1/users/{id}
-GET api/v1/notes
-GET api/v1/notes?pid=
-DELETE api/v1/{id}/notes?pid=
-POST api/v1/{id}/new-notes?pid=
+GET /v1/users/{id}
+{
+    username: string
+    email: string
+    name: string
+}
+
+GET /v1/notes?pid=?user_id=
+{
+    notes: [
+        {
+            id: int
+            note: string
+            done: 0 - не зачеркивать, 1 - зачеркнуть
+        },
+        {
+            id
+            note:
+            done:
+        }
+    ]
+}
+
+DELETE /v1/notes?user_id=?note_id=
+
+POST /v1/notes
+{
+    user_id: uuid
+    parent_id: - опционально может быть просто отсуствовать
+    note: string
+}
+
+PUT /v1/notes
+{
+    user_id: uuid
+    note_id: int
+    note: - опционально
+    done: - опционально
+}
+
+ПРОМТ НА ФРОНТЕНД:
+Надо сделать фронтенд на html, css, js. Сайт является хранением заметок людей. Снизу будут все возможные эндпоинты. Требования по кодуЖ
+1) Код легкий, !без комментариев! внутри, без сложный строений, все базово
+2) Простые вещи, минималистичный, но красивый вид, навести нажать на кнопку все должно быть видно
+3) Он многостраничный: (логин и регистрация), просмотр профиля, просмотр заметок
+4) Не писать умные вещи, все базово, четко без комментариев
+5) Лучше написать сперва все уточняющие вопросы после только начать писать код
